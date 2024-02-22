@@ -1,17 +1,18 @@
 import React, { SetStateAction, useRef, useState } from "react";
 import {
   View,
-  Text,
+  // Text,
   TextInput,
   TouchableOpacity,
   Image,
   StyleSheet,
-  Button,
+  // Button,
 } from "react-native";
 import * as DocumentPicker from "expo-document-picker";
 import * as ImagePicker from "expo-image-picker";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
 import FormFieldError from "./form-field-error";
+import { Button, Input, Text } from "@rneui/themed";
 
 const styles = StyleSheet.create({
   logo: {
@@ -22,8 +23,25 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   signInPage: {
-    justifyContent: "center",
+    alignItems: "center", // Add this line to center align
+    margin: "5%",
+    height: "100%",
+  },
+  logoContainer: {
+    width: "100%",
     alignItems: "center",
+    marginTop: 50,
+    marginBottom: 50,
+  },
+  inputContainer: {
+    width: "95%", // Adjust width of input container as needed
+  },
+  footer: {
+    position: "absolute",
+    bottom: 50,
+  },
+  footerText: {
+    textAlign: "center",
   },
 });
 
@@ -189,23 +207,23 @@ export default function SignIn({
   // );
   return (
     <View style={styles.signInPage}>
-      <View>
+      <View style={styles.logoContainer}>
         <Image style={styles.logo} source={require("../../assets/logo.png")} />
-        <Text>Welcome Back</Text>
-        <Text>Enter your email below to sign in to your account</Text>
+        <Text h2>Welcome Back</Text>
+        <Text h4>Enter your email to sign in!</Text>
       </View>
-      <View>
+      <View style={styles.inputContainer}>
         <Text style={styles.label}>Email Address</Text>
-        <TextInput
+        <Input
           onChangeText={() => console.log("hehehe")}
           // onBlur={handleBlur(InputNames.EMAIL)}
           value={userInfo[InputNames.EMAIL]}
           placeholder="johndoe@email.com"
         />
       </View>
-      <View>
+      <View style={styles.inputContainer}>
         <Text style={styles.label}>Password</Text>
-        <TextInput
+        <Input
           onChangeText={() => console.log("hehehe")}
           // onBlur={handleBlur(InputNames.PASSWORD)}
           secureTextEntry={true}
@@ -213,7 +231,14 @@ export default function SignIn({
           placeholder="*********"
         />
       </View>
-      <Button onPress={() => console.log("mmm")} title="Sign In" />
+      <View style={styles.inputContainer}>
+        <Button onPress={() => console.log("mmm")} title="Sign In" />
+      </View>
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>
+          By continuing, you agree to our Terms of Service and Privacy Policy.
+        </Text>
+      </View>
     </View>
   );
 }
