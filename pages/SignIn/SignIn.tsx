@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { View, Image } from "react-native";
-import { UseFormRegister, FieldErrors } from "react-hook-form";
-import FormFieldError from "../../components/FormFieldError/form-field-error";
 import { Button, Input, Text } from "@rneui/themed";
 import { styles } from "./SignInStyles";
 
