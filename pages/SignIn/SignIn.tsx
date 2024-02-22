@@ -1,105 +1,21 @@
-import React, { SetStateAction, useRef, useState } from "react";
-import {
-  View,
-  // Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-  // Button,
-} from "react-native";
-import * as DocumentPicker from "expo-document-picker";
-import * as ImagePicker from "expo-image-picker";
+import React, { useState } from "react";
+import { View, Image } from "react-native";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
-import FormFieldError from "./form-field-error";
+import FormFieldError from "../../components/FormFieldError/form-field-error";
 import { Button, Input, Text } from "@rneui/themed";
-
-const styles = StyleSheet.create({
-  logo: {
-    width: 100,
-    height: 100,
-  },
-  label: {
-    marginBottom: 8,
-  },
-  signInPage: {
-    alignItems: "center", // Add this line to center align
-    margin: "5%",
-    height: "100%",
-  },
-  logoContainer: {
-    width: "100%",
-    alignItems: "center",
-    marginTop: 50,
-    marginBottom: 50,
-  },
-  inputContainer: {
-    width: "95%", // Adjust width of input container as needed
-  },
-  footer: {
-    position: "absolute",
-    bottom: 50,
-  },
-  footerText: {
-    textAlign: "center",
-  },
-});
-
-type RegistationFormInputsProps = {
-  register: any; //UseFormRegister<TSignupSchema | TManagerSignupSchema>;
-  errors: any; //FieldErrors<TSignupSchema>;
-  profilePic: {
-    setProfilePic: React.Dispatch<SetStateAction<File | null>>;
-    profilePicError: string | null;
-    setProfilePicError: React.Dispatch<SetStateAction<string | null>>;
-  };
-};
+import { styles } from "./SignInStyles";
 
 enum InputNames {
   EMAIL = "email",
   PASSWORD = "password",
 }
 
-export default function SignIn({
-  register,
-  errors,
-  profilePic: { setProfilePic, profilePicError, setProfilePicError },
-}: RegistationFormInputsProps) {
-  const profilePicInputRef = useRef<HTMLInputElement | null>(null);
+const SignIn = () => {
   const [userInfo, setUserInfo] = useState({
     [InputNames.EMAIL]: "",
     [InputNames.PASSWORD]: "",
   });
-  const handleProfilePicChange = async () => {
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
 
-      if (!result.cancelled) {
-        if (!result.type.startsWith("image")) {
-          setProfilePic(null);
-          setProfilePicError(
-            "Please upload a valid image file (jpeg, jpg, png)"
-          );
-        } else if (result.fileSize > 200) {
-          //MAX_UPLOAD_SIZE
-          setProfilePic(null);
-          setProfilePicError("Please upload an image file less than 10MB");
-        } else {
-          setProfilePic(result.uri);
-          setProfilePicError(null);
-        }
-      }
-    } catch (error) {
-      console.log("Error picking image: ", error);
-    }
-  };
-
-  // return (
   //   <>
   //     <View
   //     // style={{ marginTop: 3, flexDirection: "row", alignItems: "center" }}
@@ -241,4 +157,6 @@ export default function SignIn({
       </View>
     </View>
   );
-}
+};
+
+export default SignIn;
