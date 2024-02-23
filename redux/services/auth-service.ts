@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { UserInfo } from "../../types";
 
-const API_URL = "http://127.0.0.1:4000/api";
+const API_URL = "10.0.0.11:4000/api"; // ipv4
 
 interface LoginInput {
   email: string;
@@ -18,18 +18,28 @@ export const login = createAsyncThunk<LoginResult, LoginInput>(
   "auth/login",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      console.log("send request");
-      const { data } = await axios.post<LoginResult>(`${API_URL}/auth/login`, {
-        email,
-        password,
-      });
-
-      // store user's token in local storage
-      // localStorage.setItem("token", data.token);
-
-      return data;
+      // console.log("send request", email, password, `${API_URL}`);
+      // const response = await axios.post<LoginResult>(`${API_URL}`, {
+      //   email,
+      //   password,
+      // });
+      // // store user's token in local storage
+      // // localStorage.setItem("token", data.token);
+      // console.log(response, response.data);
+      // return response.data;
+      // return data;
+      try {
+        console.log("send to ", API_URL);
+        const response = await fetch(API_URL);
+        const json = await response.json();
+        console.log("json", json);
+        return json;
+      } catch (error) {
+        console.error(error);
+      }
     } catch (error: any) {
       // return custom error message from API if any
+      console.log("error", error);
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
@@ -38,59 +48,3 @@ export const login = createAsyncThunk<LoginResult, LoginInput>(
     }
   }
 );
-
-// type UserRegistationData = TSignupSchema | { profilePic: File; role: string };
-
-// export const registerUser = createAsyncThunk<void, UserRegistationData>(
-//   "",
-//   async (userData, { rejectWithValue }) => {
-//     try {
-//       await axios.post(`${API_URL}/user`, userData);
-//     } catch (error: any) {
-//       // return custom error message from API if any
-//       if (error.response && error.response.data.message) {
-//         toast.error(
-//           "An error occured when creating your account. Please try again!",
-//         );
-//         return rejectWithValue(error.response.data.message);
-//       } else {
-//         toast.error(
-//           "An error occured when creating your account. Please try again!",
-//         );
-//         return rejectWithValue(error.message);
-//       }
-//     }
-//     toast.success("Registered successfully");
-//   },
-// );
-
-// type ManagerRegistrationData =
-//   | TManagerSignupSchema
-//   | { profilePic: File; role: string };
-
-// export const registerManager = createAsyncThunk<void, ManagerRegistrationData>(
-//   "",
-//   async (userData, { rejectWithValue }) => {
-//     try {
-//       const { company, address, ...managerData } =
-//         userData as TManagerSignupSchema;
-
-//       await axios.post(`${API_URL}/company`, { company, address });
-//       await axios.post(`${API_URL}/user/manager`, managerData);
-//     } catch (error: any) {
-//       // return custom error message from API if any
-//       if (error.response && error.response.data.message) {
-//         toast.error(
-//           "An error occured when creating your account. Please try again!",
-//         );
-//         return rejectWithValue(error.response.data.message);
-//       } else {
-//         toast.error(
-//           "An error occured when creating your account. Please try again!",
-//         );
-//         return rejectWithValue(error.message);
-//       }
-//     }
-//     toast.success("Registered successfully");
-//   },
-// );
