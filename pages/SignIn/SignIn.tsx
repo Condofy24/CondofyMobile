@@ -5,21 +5,10 @@ import { styles } from "./SignInStyles";
 import useLogin from "./useLogin";
 import FormFieldError from "../../components/FormFieldError/form-field-error";
 import { Controller } from "react-hook-form";
-import axios from "axios";
 
 const SignIn = () => {
   const { handleSubmit, errors, control, onSubmit } = useLogin();
 
-  const handleReq = async () => {
-    try {
-      const response = await fetch("https://reactnative.dev/movies.json");
-      const json = await response.json();
-      console.log(json.movies);
-      return json.movies;
-    } catch (error) {
-      console.error(error);
-    }
-  };
   return (
     <View style={styles.signInPage}>
       <View style={styles.logoContainer}>

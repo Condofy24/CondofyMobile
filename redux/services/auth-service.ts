@@ -1,8 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import { UserInfo } from "../../types";
 
-const API_URL = "10.0.0.23:4000/api"; // ipv4
+const API_URL = "172.20.10.4:4000/api"; // ipv4
 
 interface LoginInput {
   email: string;
@@ -18,6 +17,7 @@ export const login = createAsyncThunk<LoginResult, LoginInput>(
   "auth/login",
   async ({ email, password }, { rejectWithValue }) => {
     try {
+      console.log("here");
       let response = await fetch(`http://${API_URL}/auth/login`, {
         method: "POST",
         headers: {
@@ -31,16 +31,15 @@ export const login = createAsyncThunk<LoginResult, LoginInput>(
       });
 
       let data = await response.json();
-
+      console.log(data);
       return data;
     } catch (error: any) {
       // return custom error message from API if any
-      console.log("error", error);
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
         return rejectWithValue(error.message);
       }
     }
-  },
+  }
 );
