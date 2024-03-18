@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { TLoginSchema, TSignupSchema, loginSchema, signupSchema } from "../../validation-schemas";
+import {
+  TLoginSchema,
+  TSignupSchema,
+  loginSchema,
+  signupSchema,
+} from "../../validation-schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/services/auth-service";
@@ -9,7 +14,7 @@ import { useAppSelector, AppDispatch } from "../../redux/store";
 export default function useRegister() {
   const dispatch = useDispatch<AppDispatch>();
   const [loading, setLoading] = useState(false);
-  const { error, success } = useAppSelector((state) => state.authReducer.value);
+  const { error } = useAppSelector((state) => state.auth.value);
 
   const {
     register,
@@ -29,7 +34,7 @@ export default function useRegister() {
 
     if (error) {
       //   toast.error(error+": wrong credentials or non-existing user");
-    } else if (success) {
+    } else {
       //   toast.success("Login successful");
       // Todo: re-navigate user
     }

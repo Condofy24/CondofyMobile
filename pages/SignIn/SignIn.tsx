@@ -19,6 +19,7 @@ const SignIn = () => {
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Email Address</Text>
         <Controller
+          defaultValue=""
           control={control}
           rules={{
             required: true,
@@ -38,6 +39,7 @@ const SignIn = () => {
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Password</Text>
         <Controller
+          defaultValue=""
           control={control}
           rules={{
             required: true,
