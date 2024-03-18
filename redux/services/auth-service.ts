@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { UserInfo } from "../../types";
-
-const API_URL = "172.20.10.4:4000/api"; // ipv4
+import { User } from "../../types";
+import { API_URL } from "../../global";
+import axios from "axios";
 
 interface LoginInput {
   email: string;
@@ -10,31 +10,20 @@ interface LoginInput {
 
 interface LoginResult {
   token: string;
-  userInfo: UserInfo;
+  user: User;
 }
 
 export const login = createAsyncThunk<LoginResult, LoginInput>(
   "auth/login",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      console.log("here");
-      let response = await fetch(`http://${API_URL}/auth/login`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+      const { data } = await axios.post<LoginResult>(`${API_URL}/auth/login`, {
+        email,
+        password,
       });
 
-      let data = await response.json();
-      console.log(data);
       return data;
     } catch (error: any) {
-      // return custom error message from API if any
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
