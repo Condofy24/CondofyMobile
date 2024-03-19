@@ -3,6 +3,10 @@ import { object, string, TypeOf } from "zod";
 export const MAX_UPLOAD_SIZE = 1024 * 1024 * 5; // 5MB
 export const ACCEPTED_FILE_TYPES = ["image/png", "image/jpg", "image/jpeg"];
 
+export const unitKeySchema = object({
+  unitKey: string().min(8, "key must be at least 8 characters"),
+});
+
 export const signupSchema = object({
   email: string().email({ message: "A valid email is required" }),
   name: string()
@@ -17,6 +21,10 @@ export const signupSchema = object({
 });
 
 export type TSignupSchema = TypeOf<typeof signupSchema>;
+
+export const residentSignupSchema = signupSchema.and(unitKeySchema);
+
+export type TResidentSignupSchema = TypeOf<typeof residentSignupSchema>;
 
 export const managerSignupSchema = signupSchema.and(
   object({

@@ -35,7 +35,7 @@ const useLogin = () => {
         text1: `Welcome back ${res.payload.user.name}!`,
       });
 
-      navigation.navigate("Register");
+      navigation.navigate("Profile");
     }
   };
 
