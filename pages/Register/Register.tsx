@@ -24,7 +24,7 @@ export default function Register() {
         styles={styles}
       />
       <View style={styles.inputContainer}>
-        <Button onPress={handleSubmit(onSubmit)} title="Sign In" />
+        <Button onPress={handleSubmit(onSubmit)} title="Sign Up" />
       </View>
       <View style={styles.footer}>
         <Text style={styles.footerText}>
