@@ -9,6 +9,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import Toast from "react-native-toast-message";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Home from "./pages/Home/Home";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +21,7 @@ export default function App() {
           <Toast />
           <NavigationContainer>
             <Tab.Navigator initialRouteName="Home">
-              <Tab.Screen name="Home" component={SignIn} />
+              <Tab.Screen name="Home" component={Home} />
               <Tab.Screen name="Register" component={Register} />
               <Tab.Screen name="Profile" component={SignIn} />
             </Tab.Navigator>
