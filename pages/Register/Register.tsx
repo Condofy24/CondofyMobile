@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, ScrollView } from "react-native";
+import { View, Image } from "react-native";
 import { Button, Text } from "@rneui/themed";
 import { styles } from "../SignIn/SignInStyles";
 import { StyleSheet } from "react-native";
@@ -7,7 +7,7 @@ import RegistrationFormInputs from "../../components/form/registration-form-inpu
 import useRegister from "./useRegister";
 
 export default function Register() {
-  const { handleSubmit, errors, control, onSubmit } = useRegister();
+  const { handleSubmit, errors, control, onSubmit, navigation } = useRegister();
 
   return (
     <View style={styles.signInPage}>
@@ -29,6 +29,17 @@ export default function Register() {
       <View style={styles.footer}>
         <Text style={styles.footerText}>
           By continuing, you agree to our Terms of Service and Privacy Policy.
+        </Text>
+        <Text style={styles.footerText}>
+          Already have an account ?{" "}
+          <Text
+            style={{ color: "blue" }}
+            onPress={() => {
+              navigation.navigate("SignIn" as never);
+            }}
+          >
+            Sign In
+          </Text>
         </Text>
       </View>
     </View>

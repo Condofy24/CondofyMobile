@@ -1,8 +1,7 @@
 import React from "react";
-import { View, Image, ScrollView } from "react-native";
+import { View, Image } from "react-native";
 import { Button, Text } from "@rneui/themed";
 import { styles } from "../SignIn/SignInStyles";
-import { StyleSheet } from "react-native";
 import RegistrationFormInputs from "../../components/form/registration-form-inputs";
 import UseProfile from "./useProfile";
 

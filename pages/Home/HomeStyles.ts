@@ -21,7 +21,8 @@ export const styles = StyleSheet.create({
         resizeMode: "cover",
     },
     textStyle: {
-        fontWeight: "bold"
+        fontWeight: "bold",
+        fontSize: 30,
     },
     overlay: {
         flex: 1,

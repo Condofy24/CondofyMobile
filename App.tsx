@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import SignIn from "./pages/SignIn/SignIn";
 import { ThemeProvider } from "@rneui/themed";
 import theme from "./theme";
@@ -21,10 +21,20 @@ export default function App() {
         <PersistGate loading={null} persistor={persistor}>
           <Toast />
           <NavigationContainer>
-            <Tab.Navigator initialRouteName="Home">
+            <Tab.Navigator
+              initialRouteName="Register"
+              screenOptions={{ headerShown: false }}
+            >
               <Tab.Screen name="Home" component={Home} />
               <Tab.Screen name="Register" component={Register} />
               <Tab.Screen name="Profile" component={Profile} />
+              <Tab.Screen
+                name="SignIn"
+                component={SignIn}
+                options={{
+                  tabBarButton: () => null,
+                }}
+              />
             </Tab.Navigator>
           </NavigationContainer>
         </PersistGate>

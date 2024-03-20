@@ -1,12 +1,14 @@
-import { View, Image } from "react-native";
-import { Button, Input, Text } from "@rneui/themed";
+import { View, StyleSheet, Pressable } from "react-native";
+import { Input, Text } from "@rneui/themed";
 import FormFieldError from "../../components/form/form-field-error";
 import { Controller } from "react-hook-form";
+import tw from "twrnc";
+import Icon from "react-native-vector-icons/AntDesign";
 
 export type RegistrationFormInputsProps = {
   control: any;
   errors: any;
-  styles: any
+  styles: any;
 };
 
 export default function RegistrationFormInputs({
@@ -93,6 +95,32 @@ export default function RegistrationFormInputs({
         />
         <FormFieldError fieldError={errors.password} />
       </View>
+      <View style={tw`w-95% m-2`}>
+        <Pressable style={btnStyles.button} onPress={() => {}}>
+          <View style={tw`flex flex-row justify-between`}>
+            <Text style={btnStyles.text}>Upload Picture </Text>
+            <Icon name="upload" size={20} style={tw`text-right`} />
+          </View>
+        </Pressable>
+      </View>
     </>
   );
 }
+
+const btnStyles = StyleSheet.create({
+  button: {
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    borderStyle: "solid",
+    borderWidth: 2,
+    borderColor: "rgb(228, 228, 231)",
+    elevation: 3,
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    letterSpacing: 0.25,
+    color: "black",
+  },
+});

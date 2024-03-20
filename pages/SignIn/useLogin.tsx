@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { TLoginSchema, loginSchema } from "../../validation-schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -35,7 +34,7 @@ const useLogin = () => {
         text1: `Welcome back ${res.payload.user.name}!`,
       });
 
-      navigation.navigate("Profile");
+      navigation.navigate("Profile" as never);
     }
   };
 

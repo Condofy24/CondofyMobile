@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
-  TLoginSchema,
   TSignupSchema,
-  loginSchema,
   signupSchema,
 } from "../../validation-schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/services/auth-service";
 import { useAppSelector, AppDispatch } from "../../redux/store";
+import { useNavigation } from "@react-navigation/native";
 
 export default function useRegister() {
   const dispatch = useDispatch<AppDispatch>();
   const [loading, setLoading] = useState(false);
   const { error } = useAppSelector((state) => state.auth.value);
+  const navigation = useNavigation();
 
   const {
     register,
@@ -47,5 +47,6 @@ export default function useRegister() {
     control,
     loading,
     onSubmit,
+    navigation,
   };
 }
