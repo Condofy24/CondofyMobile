@@ -23,6 +23,7 @@ export const styles = StyleSheet.create({
     textStyle: {
         fontWeight: "bold",
         fontSize: 30,
+        textAlign: "center",
     },
     overlay: {
         flex: 1,
