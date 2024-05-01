@@ -33,6 +33,10 @@ Running on mac using an emulator can be done through xCode
 
 If you have a windows laptop and an android phone you cannot test on IOS.
 
+## Build
+
+- Npm run build (creates the executable for ios and android)
+
 # General Standards
 
 - No pushing directly to master
